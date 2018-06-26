@@ -8,3 +8,12 @@
       address: Faker::Address.street_address
     })
 end
+
+
+5.times do
+  Addinformation.create({
+      art: Faker::Artist.name,
+      movie: Faker::Movie.quote,
+      music: Faker::Artist.name
+    })
+end

@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625230429) do
+ActiveRecord::Schema.define(version: 20180626211329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -26,4 +32,16 @@ ActiveRecord::Schema.define(version: 20180625230429) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "extras", force: :cascade do |t|
+    t.string   "movie"
+    t.string   "art"
+    t.string   "music"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "contact_id"
+  end
+
+  add_index "extras", ["contact_id"], name: "index_extras_on_contact_id", using: :btree
+
+  add_foreign_key "extras", "contacts"
 end
